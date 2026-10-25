@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JavaScript Objects – College Seminar</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600;700&display=swap">
+<style>
+:root{--bg:#f5f6fa;--sf:#fff;--ink:#141c33;--mut:#586282;--ln:#dfe3ee;--key:#0a7377;--val:#a85f00;--kw:#6a4bd6;--cm:#67718e;--cd:#eceff7;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0d1324;--sf:#151c33;--ink:#e7ebf6;--mut:#98a3c1;--ln:#283153;--key:#4fd1c5;--val:#f4b35a;--kw:#a99cff;--cm:#8c98b8;--cd:#0a0f1e;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#0d1324;--sf:#151c33;--ink:#e7ebf6;--mut:#98a3c1;--ln:#283153;--key:#4fd1c5;--val:#f4b35a;--kw:#a99cff;--cm:#8c98b8;--cd:#0a0f1e;color-scheme:dark}
+*,::before,::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 "IBM Plex Sans",system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+button{font:inherit;color:inherit}
+button:focus-visible,summary:focus-visible{outline:2px solid var(--key);outline-offset:2px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--ln)}
+.bar{display:flex;align-items:center;gap:8px;max-width:760px;margin:auto;padding:8px 14px}
+#nav{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}
+#nav button{flex:none;border:0;background:none;color:var(--mut);font-size:14px;padding:6px 11px;border-radius:99px;cursor:pointer}
+#pg{display:block;height:3px;width:0;background:var(--key)}
+main{max-width:760px;margin:auto;padding:0 18px 90px}
+section{padding:40px 0 6px;border-top:1px solid var(--ln)}
+.hero{border:0;padding-top:34px}
+h1{font-size:clamp(31px,8.5vw,50px);line-height:1.08;letter-spacing:-.025em;margin:.25em 0 .4em}
+h2{font-size:25px;line-height:1.2;letter-spacing:-.01em;margin:0 0 10px}
+h2 small{font-size:15px;color:var(--mut);font-weight:400;margin-right:12px}
+h3{font-size:17px;margin:26px 0 4px}
+p{margin:.6em 0;max-width:64ch}
+.mut{color:var(--mut)}
+code,pre{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+p code,li code{background:var(--cd);padding:1px 5px;border-radius:5px;font-size:.88em}
+.k{color:var(--key);font-weight:600}.v{color:var(--val);font-weight:600}
+i{font-style:normal}.c{color:var(--cm)}.s,.n{color:var(--val)}.w{color:var(--kw)}.p{color:var(--key)}
+pre{margin:0;font-size:14px;line-height:1.6;overflow-x:auto}
+.cb{background:var(--cd);border:1px solid var(--ln);border-radius:10px;margin:12px 0;overflow:hidden}
+.cb pre{padding:12px 14px}
+.cb header{display:flex;justify-content:space-between;align-items:center;padding:5px 8px 5px 14px;border-bottom:1px solid var(--ln);font-size:13px;color:var(--mut)}
+.out{padding:10px 14px;border-top:1px dashed var(--ln);background:var(--sf);font:14px/1.6 "IBM Plex Mono",monospace}
+.btn,.seg button,.tg button{border:1px solid var(--ln);background:var(--bg);font-size:14px;padding:6px 13px;border-radius:99px;cursor:pointer}
+.btn.pri,.seg .on,.tg .on,#nav .on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.lab{background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:14px;margin:14px 0}
+.seg,.tg{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.lab pre{background:var(--cd);border:1px solid var(--ln);border-radius:8px;padding:10px 12px;margin:8px 0}
+.hc{background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:14px;margin-top:22px;font:15px/1.5 "IBM Plex Mono",monospace}
+.hc>div{color:var(--mut)}
+.row{display:flex;gap:14px;align-items:baseline;width:100%;margin:6px 0;padding:10px 12px;border:1px solid var(--ln);border-radius:8px;background:var(--bg);font:inherit;text-align:left;cursor:pointer}
+.row .k{min-width:7em}.row.sel{border-color:var(--key)}
+#hr{margin:10px 0 0;font-size:14px;min-height:1.6em;color:var(--mut)}
+ol.st{list-style:none;padding:0;margin:14px 0}
+.st li{border-left:3px solid var(--ln);padding:2px 0 2px 14px;margin-bottom:10px;transition:border-color .25s}
+.st li.done{border-color:var(--key)}
+.st pre{margin:3px 0}
+.st .o{display:none;font:14px "IBM Plex Mono",monospace}
+.st .done .o{display:block}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.g>div{background:var(--sf);border:1px solid var(--ln);border-radius:12px;padding:6px 16px 10px}
+.g b{display:block;margin-top:8px}
+.ad{padding-left:22px}.ad li{margin:6px 0}
+details{border-bottom:1px solid var(--ln);padding:12px 0}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--key);font-weight:700}
+details[open] summary::after{content:"–"}
+details p{margin:8px 0 0;color:var(--mut)}
+blockquote{margin:24px 0 8px;padding:4px 0 4px 18px;border-left:4px solid var(--key);font-size:19px;line-height:1.5}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.st li{transition:none}}
+</style>
+</head>
+<body>
+<div class="top"><div class="bar"><div id="nav"></div><button id="th" class="btn" aria-label="Switch light or dark theme">◐</button></div><i id="pg"></i></div>
+<main>
+
+<section class="hero">
+<p class="mut">College seminar</p>
+<h1>How to create and use objects in JavaScript</h1>
+<p>Learn how objects store data, and how to access, modify and use their properties and methods.</p>
+<div id="hc" class="hc"></div>
+</section>
+
+<section id="s1" data-t="Intro"><h2><small>1</small>Introduction</h2>
+<p>Good morning, respected staff and my dear friends. Today, I am going to present my seminar on the topic “How to Create and Use Objects in JavaScript.”</p>
+<p>JavaScript is a popular programming language used to make websites interactive. An object is an important concept that lets us group related information and functions together.</p></section>
+
+<section id="s2" data-t="Object"><h2><small>2</small>What is an object?</h2>
+<p>An object is a collection of <b>properties</b> and values. A property describes information about an object. A property can also contain a function, commonly called a <b>method</b>.</p>
+<div class="cb"><pre>
+let student = {
+  name: "Gokul",
+  age: 20,
+  department: "IT"
+};</pre></div>
+<p><code>student</code> refers to the object. <span class="k">name</span>, <span class="k">age</span> and <span class="k">department</span> are property names (keys); <span class="v">"Gokul"</span>, <span class="v">20</span> and <span class="v">"IT"</span> are their values.</p></section>
+
+<section id="s3" data-t="Create"><h2><small>3</small>How to create an object</h2>
+<p>A simple way is <b>object literal notation</b>. Write properties inside curly braces <code>{ }</code>, separate them with commas, and place a colon between each key and value.</p>
+<div class="cb" data-out="BMW"><pre>
+let car = {
+  brand: "BMW",
+  color: "Black",
+  speed: 200
+};
+console.log(car.brand);</pre></div></section>
+
+<section id="s4" data-t="Access"><h2><small>4</small>Accessing object properties</h2>
+<h3>A. Dot notation</h3>
+<p>Dot notation uses a dot followed by the property name. It is convenient when you know the property name.</p>
+<div class="cb" data-out="Gokul|20"><pre>
+console.log(student.name);
+console.log(student.age);</pre></div>
+<h3>B. Bracket notation</h3>
+<p>Bracket notation puts the property key inside square brackets. A string key is written in quotation marks.</p>
+<div class="cb" data-out="Gokul|20"><pre>
+console.log(student["name"]);
+console.log(student["age"]);</pre></div>
+<h3>C. The key difference: dynamic property access</h3>
+<p>Pick a notation and a property to see what each one returns.</p>
+<div class="lab"><div class="seg" id="nt"><button data-n="dot">Dot</button><button data-n="br">Bracket</button><button data-n="dyn">Dynamic</button></div><div class="tg" id="tg"></div><pre id="exc"></pre><p id="exn" class="mut"></p></div>
+<p><b>Tip:</b> bracket notation also works for property names containing spaces, such as <code>student["first name"]</code>. Dot notation cannot access that property using the same form.</p></section>
+
+<section id="s5" data-t="Modify"><h2><small>5</small>Add, update and delete properties</h2>
+<p>Assignment can add or update a property; <code>delete</code> removes a property.</p>
+<div class="cb" data-out='{ age: 21, department: "IT" }'><pre>
+let student = {
+  name: "Gokul",
+  age: 20
+};
+student.department = "IT"; // Add
+student.age = 21;          // Update
+delete student.name;       // Delete
+console.log(student);</pre></div>
+<p>Try each step yourself:</p>
+<div class="lab"><div class="seg" id="pb"><button data-a="add">Add department</button><button data-a="upd">Update age</button><button data-a="del">Delete name</button><button data-a="rs">Reset</button></div><pre id="plc"></pre><pre id="plo"></pre></div></section>
+
+<section id="s6" data-t="Methods"><h2><small>6</small>Methods inside objects</h2>
+<p>A function stored as an object property is called a method. A method lets an object perform an action.</p>
+<div class="cb" data-out="Hello, my name is Gokul"><pre>
+let student = {
+  name: "Gokul",
+  greet: function() {
+    console.log("Hello, my name is " + this.name);
+  }
+};
+student.greet();</pre></div>
+<p>Here, <code>this.name</code> refers to the object’s name when the method is called as <code>student.greet()</code>.</p></section>
+
+<section id="s7" data-t="Program"><h2><small>7</small>Complete demonstration program</h2>
+<p>This program demonstrates object creation, dot notation, bracket notation, dynamic access, adding and updating properties, calling a method, and deleting a property.</p>
+<div class="cb"><pre>
+let student = {
+  name: "Gokul",
+  age: 20,
+  department: "IT",
+  greet: function() {
+    console.log("Hello, my name is " + this.name);
+  }
+};</pre></div>
+<div><button id="rn" class="btn pri">Run program</button> <button id="rz" class="btn">Reset</button></div>
+<ol class="st" id="st"></ol>
+<p id="fn" hidden>The final output is <code>undefined</code> because the <code>department</code> property has been deleted before it is accessed.</p></section>
+
+<section id="s8" data-t="Uses"><h2><small>8</small>Real-world uses of objects</h2>
+<div class="g">
+<div><b>🎓 Student management</b><p>Store a student’s name, register number, marks, and department.</p></div>
+<div><b>🛒 Online shopping</b><p>Store product names, prices, descriptions, and stock details.</p></div>
+<div><b>🚗 Vehicle applications</b><p>Store a vehicle’s brand, model, and speed.</p></div>
+<div><b>🌐 Web applications</b><p>Organize user profiles and settings.</p></div>
+</div></section>
+
+<section id="s9" data-t="Benefits"><h2><small>9</small>Advantages of objects</h2>
+<ol class="ad"><li>They group related information in one place.</li><li>They make code easier to read and maintain.</li><li>Properties can be added, updated, and deleted.</li><li>Objects can contain methods that perform actions.</li><li>They help represent real-world things in software.</li></ol></section>
+
+<section id="s10" data-t="Class"><h2><small>10</small>Object vs. class</h2>
+<div class="g">
+<div><b>Object</b><p>A particular collection of properties and methods.</p></div>
+<div><b>Class</b><p>A template that can be used to create objects.</p></div>
+</div>
+<div class="cb" data-out="Gokul"><pre>
+class Student {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+}
+let student1 = new Student("Gokul", 20);
+console.log(student1.name); // Gokul</pre></div>
+<p>The main demonstration program uses an object literal; it does not declare a class. Here, <code>Student</code> is the class name, and <code>student1</code> refers to an object created from that class. This is an additional concept; a class is not required for the main seminar demonstration.</p></section>
+
+<section id="s11" data-t="Viva"><h2><small>11</small>Viva questions and answers</h2>
+<details><summary>What is an object in JavaScript?</summary><p>An object is a collection of properties and values, and it can also contain methods.</p></details>
+<details><summary>How do you create an object?</summary><p>A common beginner-friendly way is object literal notation, using curly braces.</p></details>
+<details><summary>What is the difference between dot and bracket notation?</summary><p>Dot notation uses the property name directly. Bracket notation uses square brackets and can use a variable to select a property dynamically.</p></details>
+<details><summary>Can we change an object after creating it?</summary><p>Yes. We can add, update, and delete its properties.</p></details>
+<details><summary>What is a method?</summary><p>A method is a function stored as a property of an object.</p></details>
+<details><summary>Why does the program print undefined at the end?</summary><p>Because the department property has been deleted before the program tries to access it.</p></details></section>
+
+<section id="s12" data-t="Wrap-up"><h2><small>12</small>Conclusion</h2>
+<p>To conclude, objects are an essential part of JavaScript. We can create objects using object literal notation, access their properties using dot or bracket notation, change their data, and call methods to perform actions. Objects help us organize information and build structured, interactive applications.</p>
+<blockquote>“In JavaScript, objects organize data, dot notation keeps access simple, and bracket notation makes it dynamic—together, they help us write clear and flexible code.”</blockquote>
+<p>Thank you all for giving me this opportunity to present my seminar.</p></section>
+</main>
+<script>
+const $=q=>document.querySelector(q),$$=q=>document.querySelectorAll(q),J=JSON.stringify,S={name:"Gokul",age:20,department:"IT"},ks=Object.keys(S);
+const hl=t=>t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/(\/\/.*)|("[^"]*")|\b(let|function|delete|class|constructor|new|this)\b|\b(\d+)\b|\b(\w+)(?=:)/g,(m,c,s,w,n)=>`<i class=${c?"c":s?"s":w?"w":n?"n":"p"}>${m}</i>`);
+// code blocks
+$$('.cb').forEach(b=>{const pre=b.querySelector('pre');pre.innerHTML=hl(pre.textContent.trim());const o=b.dataset.out;if(!o)return;
+ const h=document.createElement('header'),out=document.createElement('div');h.innerHTML='<span>JavaScript</span><button class="btn">Run</button>';
+ out.className='out';out.hidden=true;out.innerHTML=o.split('|').map(x=>'<div><span class="mut">›</span> '+x+'</div>').join('');
+ b.prepend(h);b.append(out);h.lastChild.onclick=e=>{out.hidden=!out.hidden;e.target.textContent=out.hidden?'Run':'Hide output'}});
+// hero card
+$('#hc').innerHTML='<div>let student = {</div>'+ks.map(x=>`<button class="row" data-k="${x}"><span class="k">${x}</span><span class="v">${J(S[x])}</span></button>`).join('')+'<div>};</div><p id="hr">Tap a key to read its value.</p>';
+$('#hc').onclick=e=>{const b=e.target.closest('.row');if(!b)return;$$('.row').forEach(r=>r.classList.toggle('sel',r==b));$('#hr').innerHTML='student.'+b.dataset.k+' → <b>'+S[b.dataset.k]+'</b>'};
+// access explorer
+let n='dot',k='name';
+$('#tg').innerHTML=ks.map(x=>`<button data-k="${x}">${x}</button>`).join('');
+function ex(){const r=S[k],c={dot:`console.log(student.${k}); // ${r}`,br:`console.log(student["${k}"]); // ${r}`,dyn:`let key = "${k}";\nconsole.log(student[key]); // ${r}\nconsole.log(student.key); // undefined`}[n];
+ $('#exc').innerHTML=hl(c);
+ $('#exn').textContent={dot:'Dot notation uses the property name directly.',br:'Bracket notation puts the key inside square brackets, as a string.',dyn:'student[key] reads the variable key, so it reaches the property whose name it holds. student.key looks for a property literally named “key”, so it is undefined.'}[n];
+ $$('#nt button').forEach(b=>b.classList.toggle('on',b.dataset.n==n));$$('#tg button').forEach(b=>b.classList.toggle('on',b.dataset.k==k))}
+$('#nt').onclick=e=>{if(e.target.dataset.n){n=e.target.dataset.n;ex()}};
+$('#tg').onclick=e=>{if(e.target.dataset.k){k=e.target.dataset.k;ex()}};ex();
+// add / update / delete playground
+let st={name:"Gokul",age:20},lc='// choose an action';
+const A={add:['student.department = "IT";',()=>st.department="IT"],upd:['student.age = 21;',()=>st.age=21],del:['delete student.name;',()=>delete st.name]};
+function pl(){$('#plc').innerHTML=hl(lc);const e=Object.entries(st);$('#plo').innerHTML=hl('console.log(student);\n'+(e.length?'{\n'+e.map(([a,b])=>`  ${a}: ${J(b)}`).join(',\n')+'\n}':'{}'))}
+$('#pb').onclick=e=>{const a=e.target.dataset.a;if(!a)return;if(a=='rs'){st={name:"Gokul",age:20};lc='// choose an action'}else{A[a][1]();lc=A[a][0]}pl()};pl();
+// program runner
+const P=[["Dot notation",'console.log(student.name);',"Gokul"],["Bracket notation",'console.log(student["age"]);',"20"],["Dynamic property access",'let key = "department";\nconsole.log(student[key]);',"IT"],["Add a property",'student.college = "MGR University";\nconsole.log(student.college);',"MGR University"],["Update a property",'student.age = 21;\nconsole.log(student.age);',"21"],["Call a method",'student.greet();',"Hello, my name is Gokul"],["Delete a property",'delete student.department;\nconsole.log(student.department);',"undefined"]];
+$('#st').innerHTML=P.map(([t,c,o])=>`<li><b>${t}</b><pre>${hl(c)}</pre><div class="o"><span class="mut">›</span> ${o}</div></li>`).join('');
+let tm=[];const rs=()=>{tm.forEach(clearTimeout);tm=[];$$('#st li').forEach(l=>l.classList.remove('done'));$('#fn').hidden=true};
+$('#rn').onclick=()=>{rs();$$('#st li').forEach((l,i)=>tm.push(setTimeout(()=>{l.classList.add('done');if(i==6)$('#fn').hidden=false},i*500)))};$('#rz').onclick=rs;
+// navigation, progress, theme
+const secs=[...$$('section[data-t]')];
+$('#nav').innerHTML=secs.map(s=>`<button data-i="${s.id}">${s.dataset.t}</button>`).join('');
+$('#nav').onclick=e=>{const i=e.target.dataset.i;i&&document.getElementById(i).scrollIntoView()};
+const act=id=>$$('#nav button').forEach(b=>{const on=b.dataset.i==id,was=b.classList.contains('on');b.classList.toggle('on',on);if(on&&!was)b.scrollIntoView({inline:'center',block:'nearest'})});
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&act(e.target.id)),{rootMargin:'-30% 0px -60% 0px'});secs.forEach(s=>io.observe(s));
+addEventListener('scroll',()=>{const h=document.documentElement,m=h.scrollHeight-h.clientHeight;$('#pg').style.width=(m>0?100*h.scrollTop/m:0)+'%';if(m>0&&h.scrollTop>=m-4)act(secs[secs.length-1].id)},{passive:true});
+$('#th').onclick=()=>{const d=document.documentElement,dark=d.dataset.theme?d.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;d.dataset.theme=dark?'light':'dark'};
+</script>
+</body>
+</html>
