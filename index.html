@@ -3,233 +3,1453 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>JavaScript Objects – College Seminar</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600;700&display=swap">
+<title>JavaScript Objects – College Seminar Presentation</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
 <style>
-:root{--bg:#f5f6fa;--sf:#fff;--ink:#141c33;--mut:#586282;--ln:#dfe3ee;--key:#0a7377;--val:#a85f00;--kw:#6a4bd6;--cm:#67718e;--cd:#eceff7;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0d1324;--sf:#151c33;--ink:#e7ebf6;--mut:#98a3c1;--ln:#283153;--key:#4fd1c5;--val:#f4b35a;--kw:#a99cff;--cm:#8c98b8;--cd:#0a0f1e;color-scheme:dark}}
-:root[data-theme=dark]{--bg:#0d1324;--sf:#151c33;--ink:#e7ebf6;--mut:#98a3c1;--ln:#283153;--key:#4fd1c5;--val:#f4b35a;--kw:#a99cff;--cm:#8c98b8;--cd:#0a0f1e;color-scheme:dark}
-*,::before,::after{box-sizing:inherit}
-html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 "IBM Plex Sans",system-ui,sans-serif}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
-button{font:inherit;color:inherit}
-button:focus-visible,summary:focus-visible{outline:2px solid var(--key);outline-offset:2px}
-.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--ln)}
-.bar{display:flex;align-items:center;gap:8px;max-width:760px;margin:auto;padding:8px 14px}
-#nav{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}
-#nav button{flex:none;border:0;background:none;color:var(--mut);font-size:14px;padding:6px 11px;border-radius:99px;cursor:pointer}
-#pg{display:block;height:3px;width:0;background:var(--key)}
-main{max-width:760px;margin:auto;padding:0 18px 90px}
-section{padding:40px 0 6px;border-top:1px solid var(--ln)}
-.hero{border:0;padding-top:34px}
-h1{font-size:clamp(31px,8.5vw,50px);line-height:1.08;letter-spacing:-.025em;margin:.25em 0 .4em}
-h2{font-size:25px;line-height:1.2;letter-spacing:-.01em;margin:0 0 10px}
-h2 small{font-size:15px;color:var(--mut);font-weight:400;margin-right:12px}
-h3{font-size:17px;margin:26px 0 4px}
-p{margin:.6em 0;max-width:64ch}
-.mut{color:var(--mut)}
-code,pre{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
-p code,li code{background:var(--cd);padding:1px 5px;border-radius:5px;font-size:.88em}
-.k{color:var(--key);font-weight:600}.v{color:var(--val);font-weight:600}
-i{font-style:normal}.c{color:var(--cm)}.s,.n{color:var(--val)}.w{color:var(--kw)}.p{color:var(--key)}
-pre{margin:0;font-size:14px;line-height:1.6;overflow-x:auto}
-.cb{background:var(--cd);border:1px solid var(--ln);border-radius:10px;margin:12px 0;overflow:hidden}
-.cb pre{padding:12px 14px}
-.cb header{display:flex;justify-content:space-between;align-items:center;padding:5px 8px 5px 14px;border-bottom:1px solid var(--ln);font-size:13px;color:var(--mut)}
-.out{padding:10px 14px;border-top:1px dashed var(--ln);background:var(--sf);font:14px/1.6 "IBM Plex Mono",monospace}
-.btn,.seg button,.tg button{border:1px solid var(--ln);background:var(--bg);font-size:14px;padding:6px 13px;border-radius:99px;cursor:pointer}
-.btn.pri,.seg .on,.tg .on,#nav .on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.lab{background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:14px;margin:14px 0}
-.seg,.tg{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
-.lab pre{background:var(--cd);border:1px solid var(--ln);border-radius:8px;padding:10px 12px;margin:8px 0}
-.hc{background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:14px;margin-top:22px;font:15px/1.5 "IBM Plex Mono",monospace}
-.hc>div{color:var(--mut)}
-.row{display:flex;gap:14px;align-items:baseline;width:100%;margin:6px 0;padding:10px 12px;border:1px solid var(--ln);border-radius:8px;background:var(--bg);font:inherit;text-align:left;cursor:pointer}
-.row .k{min-width:7em}.row.sel{border-color:var(--key)}
-#hr{margin:10px 0 0;font-size:14px;min-height:1.6em;color:var(--mut)}
-ol.st{list-style:none;padding:0;margin:14px 0}
-.st li{border-left:3px solid var(--ln);padding:2px 0 2px 14px;margin-bottom:10px;transition:border-color .25s}
-.st li.done{border-color:var(--key)}
-.st pre{margin:3px 0}
-.st .o{display:none;font:14px "IBM Plex Mono",monospace}
-.st .done .o{display:block}
-.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
-.g>div{background:var(--sf);border:1px solid var(--ln);border-radius:12px;padding:6px 16px 10px}
-.g b{display:block;margin-top:8px}
-.ad{padding-left:22px}.ad li{margin:6px 0}
-details{border-bottom:1px solid var(--ln);padding:12px 0}
-summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
-summary::-webkit-details-marker{display:none}
-summary::after{content:"+";color:var(--key);font-weight:700}
-details[open] summary::after{content:"–"}
-details p{margin:8px 0 0;color:var(--mut)}
-blockquote{margin:24px 0 8px;padding:4px 0 4px 18px;border-left:4px solid var(--key);font-size:19px;line-height:1.5}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.st li{transition:none}}
+:root {
+  --bg: #0b1120;
+  --bg-gradient: radial-gradient(circle at top right, #1e293b 0%, #0b1120 70%);
+  --sf: #151f32;
+  --sf-card: rgba(21, 31, 50, 0.85);
+  --ink: #f1f5f9;
+  --ink-bright: #ffffff;
+  --mut: #94a3b8;
+  --ln: #24344d;
+  --key: #38bdf8;
+  --key-glow: rgba(56, 189, 248, 0.2);
+  --val: #fbbf24;
+  --kw: #a78bfa;
+  --cm: #64748b;
+  --cd: #0a0f1d;
+  --accent: #0ea5e9;
+  --accent-light: rgba(14, 165, 233, 0.15);
+  --success: #34d399;
+  --border-radius: 16px;
+  --font-main: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #f8fafc;
+  --bg-gradient: radial-gradient(circle at top right, #e2e8f0 0%, #f8fafc 70%);
+  --sf: #ffffff;
+  --sf-card: rgba(255, 255, 255, 0.95);
+  --ink: #0f172a;
+  --ink-bright: #020617;
+  --mut: #64748b;
+  --ln: #e2e8f0;
+  --key: #0284c7;
+  --key-glow: rgba(2, 132, 199, 0.15);
+  --val: #b45309;
+  --kw: #7c3aed;
+  --cm: #94a3b8;
+  --cd: #f1f5f9;
+  --accent: #0284c7;
+  --accent-light: rgba(2, 132, 199, 0.1);
+  --success: #059669;
+  color-scheme: light;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  background-image: var(--bg-gradient);
+  color: var(--ink);
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ================= TOP PRESENTATION HEADER ================= */
+.deck-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: rgba(11, 17, 32, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ln);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 100;
+}
+:root[data-theme="light"] .deck-top {
+  background: rgba(248, 250, 252, 0.88);
+}
+
+.brand-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.topic-tag {
+  background: var(--accent-light);
+  color: var(--key);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 99px;
+  border: 1px solid var(--key-glow);
+}
+.deck-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink-bright);
+}
+
+.top-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ctrl-btn {
+  background: var(--sf);
+  border: 1px solid var(--ln);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 13px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+.ctrl-btn:hover {
+  background: var(--accent-light);
+  border-color: var(--key);
+  color: var(--key);
+}
+
+/* Top Progress Bar */
+#progress-bar {
+  position: fixed;
+  top: 59px;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--key), var(--kw));
+  width: 0%;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 101;
+}
+
+/* ================= SLIDES DECK WRAPPER ================= */
+#deck {
+  position: absolute;
+  top: 60px;
+  bottom: 65px;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transform: translateY(12px) scale(0.99);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 32px;
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+/* Presentation Canvas Card */
+.slide-canvas {
+  width: 100%;
+  max-width: 1320px;
+  max-height: 100%;
+  overflow-y: auto;
+  background: var(--sf-card);
+  border: 1px solid var(--ln);
+  border-radius: var(--border-radius);
+  padding: 36px 44px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  scrollbar-width: thin;
+}
+
+/* Slide Header */
+.slide-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--key);
+  margin-bottom: 8px;
+}
+.slide-badge .num-pill {
+  background: var(--accent);
+  color: #fff;
+  padding: 2px 9px;
+  border-radius: 99px;
+  font-size: 12px;
+}
+
+.slide-canvas h1 {
+  font-size: clamp(30px, 3.2vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin: 0 0 16px;
+  color: var(--ink-bright);
+}
+
+.slide-canvas h2 {
+  font-size: clamp(24px, 2.5vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 0 16px;
+  color: var(--ink-bright);
+}
+
+.slide-canvas h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 18px 0 8px;
+  color: var(--key);
+}
+
+.slide-canvas p {
+  font-size: clamp(16px, 1.25vw, 19px);
+  line-height: 1.6;
+  margin: 0 0 14px;
+  color: var(--ink);
+}
+.slide-canvas p.lead {
+  font-size: clamp(18px, 1.45vw, 22px);
+  color: var(--mut);
+}
+
+.mut { color: var(--mut); }
+code, pre { font-family: var(--font-mono); }
+p code, li code {
+  background: var(--cd);
+  color: var(--key);
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  border: 1px solid var(--ln);
+}
+
+/* Syntax Highlighting Colors */
+.k { color: var(--key); font-weight: 600; }
+.v { color: var(--val); font-weight: 600; }
+i { font-style: normal; }
+.c { color: var(--cm); }
+.s, .n { color: var(--val); }
+.w { color: var(--kw); font-weight: 600; }
+.p { color: var(--key); }
+
+/* Split Column Layout for Slide Decks */
+.slide-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 32px;
+  align-items: center;
+  width: 100%;
+}
+@media (max-width: 960px) {
+  .slide-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* Code Blocks */
+.cb {
+  background: var(--cd);
+  border: 1px solid var(--ln);
+  border-radius: 12px;
+  margin: 12px 0;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.cb header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 14px;
+  border-bottom: 1px solid var(--ln);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mut);
+  background: rgba(0, 0, 0, 0.15);
+}
+.cb pre {
+  padding: 14px 16px;
+  margin: 0;
+  font-size: clamp(13px, 1.1vw, 15px);
+  line-height: 1.6;
+  overflow-x: auto;
+}
+.out {
+  padding: 10px 16px;
+  border-top: 1px dashed var(--ln);
+  background: var(--sf);
+  font: 14px/1.6 var(--font-mono);
+  color: var(--key);
+}
+
+/* Hero / Inspector Card */
+.hc {
+  background: var(--cd);
+  border: 1px solid var(--ln);
+  border-radius: 12px;
+  padding: 16px;
+  font: 15px/1.5 var(--font-mono);
+}
+.hc > div { color: var(--mut); }
+.row {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  width: 100%;
+  margin: 6px 0;
+  padding: 10px 14px;
+  border: 1px solid var(--ln);
+  border-radius: 8px;
+  background: var(--sf);
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.row:hover {
+  border-color: var(--key);
+  transform: translateX(4px);
+}
+.row .k { min-width: 7em; }
+.row.sel {
+  border-color: var(--key);
+  background: var(--accent-light);
+}
+#hr {
+  margin: 12px 0 0;
+  font-size: 15px;
+  min-height: 1.6em;
+  color: var(--key);
+  font-weight: 500;
+}
+
+/* Interactive Playground & Labs */
+.lab {
+  background: var(--sf);
+  border: 1px solid var(--ln);
+  border-radius: 14px;
+  padding: 18px;
+  margin: 12px 0;
+}
+.seg, .tg {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.btn, .seg button, .tg button {
+  border: 1px solid var(--ln);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 7px 15px;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+.btn:hover, .seg button:hover, .tg button:hover {
+  border-color: var(--key);
+}
+.btn.pri, .seg .on, .tg .on {
+  background: var(--key);
+  color: #fff;
+  border-color: var(--key);
+}
+.lab pre {
+  background: var(--cd);
+  border: 1px solid var(--ln);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Animated Program Step List */
+ol.st {
+  list-style: none;
+  padding: 0;
+  margin: 14px 0;
+  max-height: 380px;
+  overflow-y: auto;
+}
+.st li {
+  border-left: 3px solid var(--ln);
+  padding: 6px 0 6px 16px;
+  margin-bottom: 8px;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.st li.done {
+  border-color: var(--success);
+  transform: translateX(3px);
+}
+.st pre {
+  margin: 4px 0;
+  font-size: 13.5px;
+}
+.st .o {
+  display: none;
+  font: 13.5px var(--font-mono);
+  color: var(--val);
+}
+.st .done .o {
+  display: block;
+}
+
+/* 4-Card Grid for Real World Uses */
+.g {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin: 16px 0;
+}
+.g > div {
+  background: var(--sf);
+  border: 1px solid var(--ln);
+  border-radius: 12px;
+  padding: 18px 20px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.g > div:hover {
+  transform: translateY(-4px);
+  border-color: var(--key);
+}
+.g b {
+  display: block;
+  font-size: 17px;
+  margin-bottom: 8px;
+  color: var(--ink-bright);
+}
+.g p {
+  font-size: 15px;
+  margin: 0;
+  color: var(--mut);
+}
+
+/* Advantages list */
+.ad-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 14px;
+  margin: 16px 0;
+}
+.ad-card {
+  background: var(--sf);
+  border: 1px solid var(--ln);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.ad-num {
+  background: var(--accent-light);
+  color: var(--key);
+  font-weight: 700;
+  font-size: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ad-text {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+/* Quote & Final Slide */
+blockquote {
+  margin: 20px 0;
+  padding: 16px 24px;
+  border-left: 4px solid var(--key);
+  background: var(--accent-light);
+  border-radius: 0 12px 12px 0;
+  font-size: clamp(18px, 1.6vw, 22px);
+  line-height: 1.55;
+  font-weight: 500;
+  color: var(--ink-bright);
+}
+
+.thank-you-box {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(167, 139, 250, 0.15));
+  border: 1px solid var(--key-glow);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  margin-top: 16px;
+}
+.thank-you-box h3 {
+  font-size: 24px;
+  margin: 0 0 8px;
+  color: var(--ink-bright);
+}
+
+/* ================= BOTTOM PRESENTER BAR ================= */
+.deck-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 65px;
+  background: rgba(11, 17, 32, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--ln);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 100;
+}
+:root[data-theme="light"] .deck-bottom {
+  background: rgba(248, 250, 252, 0.9);
+}
+
+.presenter-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--mut);
+}
+.presenter-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 99px;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.nav-btn {
+  background: var(--sf);
+  border: 1px solid var(--ln);
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+.nav-btn:hover:not(:disabled) {
+  background: var(--key);
+  color: #fff;
+  border-color: var(--key);
+}
+.nav-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.slide-counter {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--cd);
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--ln);
+  min-width: 90px;
+  text-align: center;
+}
+
+.shortcut-hints {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--mut);
+}
+.kbd {
+  background: var(--cd);
+  border: 1px solid var(--ln);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+/* ================= SLIDE OVERVIEW / SORTER MODAL ================= */
+#overview-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 17, 32, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: all 0.25s ease;
+}
+:root[data-theme="light"] #overview-modal {
+  background: rgba(248, 250, 252, 0.96);
+}
+#overview-modal.open {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.overview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.overview-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+.overview-card {
+  background: var(--sf);
+  border: 2px solid var(--ln);
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+.overview-card:hover {
+  border-color: var(--key);
+  transform: translateY(-2px);
+}
+.overview-card.active {
+  border-color: var(--key);
+  background: var(--accent-light);
+  box-shadow: 0 0 0 1px var(--key);
+}
+.overview-card .ov-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--key);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.overview-card .ov-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink-bright);
+}
+
+@media (max-width: 768px) {
+  .shortcut-hints { display: none; }
+  .deck-title { display: none; }
+  .slide-canvas { padding: 20px; }
+  .deck-top, .deck-bottom { padding: 0 12px; }
+}
 </style>
 </head>
 <body>
-<div class="top"><div class="bar"><div id="nav"></div><button id="th" class="btn" aria-label="Switch light or dark theme">◐</button></div><i id="pg"></i></div>
-<main>
 
-<section class="hero">
-<p class="mut">College seminar</p>
-<h1>How to create and use objects in JavaScript</h1>
-<p>Learn how objects store data, and how to access, modify and use their properties and methods.</p>
-<div id="hc" class="hc"></div>
-</section>
+<!-- TOP PRESENTATION BAR -->
+<header class="deck-top">
+  <div class="brand-meta">
+    <span class="topic-tag">College Seminar</span>
+    <span class="deck-title">JavaScript Objects: Create &amp; Use</span>
+  </div>
+  <div class="top-controls">
+    <button id="btn-overview" class="ctrl-btn" title="Slide Overview [O]">
+      <span>📑</span> <span>Slides</span>
+    </button>
+    <button id="btn-theme" class="ctrl-btn" title="Toggle Theme">
+      <span id="theme-icon">◐</span>
+    </button>
+    <button id="btn-fullscreen" class="ctrl-btn" title="Toggle Fullscreen [F]">
+      <span id="fs-icon">⛶</span> <span>Fullscreen</span>
+    </button>
+  </div>
+</header>
 
-<section id="s1" data-t="Intro"><h2><small>1</small>Introduction</h2>
-<p>Good morning, respected staff and my dear friends. Today, I am going to present my seminar on the topic “How to Create and Use Objects in JavaScript.”</p>
-<p>JavaScript is a popular programming language used to make websites interactive. An object is an important concept that lets us group related information and functions together.</p></section>
+<div id="progress-bar"></div>
 
-<section id="s2" data-t="Object"><h2><small>2</small>What is an object?</h2>
-<p>An object is a collection of <b>properties</b> and values. A property describes information about an object. A property can also contain a function, commonly called a <b>method</b>.</p>
-<div class="cb"><pre>
-let student = {
+<!-- MAIN SLIDES DECK -->
+<main id="deck">
+
+  <!-- SLIDE 0: TITLE / HERO SLIDE -->
+  <section class="slide active" data-title="Seminar Title">
+    <div class="slide-canvas">
+      <div class="slide-grid">
+        <div>
+          <div class="slide-badge"><span class="num-pill">College Seminar</span> Department of IT</div>
+          <h1>How to Create and Use Objects in JavaScript</h1>
+          <p class="lead">An interactive college seminar presentation on grouping data, property access, object mutation, and real-world methods.</p>
+          <div style="margin-top: 24px; display: flex; gap: 12px; align-items: center;">
+            <button class="nav-btn" style="background: var(--key); color: #fff; border-color: var(--key);" onclick="deck.goNext()">
+              Start Presentation ▶
+            </button>
+            <span class="mut" style="font-size: 14px;">or press <kbd class="kbd">Space</kbd> / <kbd class="kbd">→</kbd></span>
+          </div>
+        </div>
+        <div>
+          <div class="hc" id="hc"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 1: INTRODUCTION -->
+  <section class="slide" data-title="1. Introduction">
+    <div class="slide-canvas">
+      <div class="slide-badge"><span class="num-pill">01</span> Overview</div>
+      <h2>Introduction</h2>
+      <div class="slide-grid">
+        <div>
+          <p class="lead">Good morning, respected staff and my dear friends.</p>
+          <p>Today, I am presenting my seminar on <b>“How to Create and Use Objects in JavaScript.”</b></p>
+          <p>JavaScript is a versatile programming language used to make modern websites dynamic and interactive. At the center of JavaScript data modeling lies the <b>Object</b>.</p>
+        </div>
+        <div>
+          <div class="g" style="grid-template-columns: 1fr;">
+            <div>
+              <b>🌐 What is JavaScript?</b>
+              <p>The core programming language of the web that brings static HTML/CSS pages to life.</p>
+            </div>
+            <div>
+              <b>📦 Why do we need Objects?</b>
+              <p>To logically group related variables, state, and functionality into a single structured unit.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 2: WHAT IS AN OBJECT? -->
+  <section class="slide" data-title="2. What is an Object?">
+    <div class="slide-canvas">
+      <div class="slide-badge"><span class="num-pill">02</span> Concept</div>
+      <h2>What is an Object?</h2>
+      <p class="lead">An object is a standalone entity consisting of a collection of <b>properties</b> (keys) and <b>values</b>.</p>
+      <div class="slide-grid">
+        <div>
+          <p>• <b>Property:</b> Describes information or attributes (e.g. name, age, department).</p>
+          <p>• <b>Key-Value Pair:</b> Every property associates a unique name with a specific value.</p>
+          <p>• <b>Method:</b> When a property value is a function, it is called a method.</p>
+          <p><span class="k">student</span> refers to the object, with keys <span class="k">name</span>, <span class="k">age</span>, and <span class="k">department</span>.</p>
+        </div>
+        <div>
+          <div class="cb">
+            <header><span>JavaScript Object Syntax</span></header>
+            <pre>let student = {
   name: "Gokul",
   age: 20,
   department: "IT"
-};</pre></div>
-<p><code>student</code> refers to the object. <span class="k">name</span>, <span class="k">age</span> and <span class="k">department</span> are property names (keys); <span class="v">"Gokul"</span>, <span class="v">20</span> and <span class="v">"IT"</span> are their values.</p></section>
+};</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section id="s3" data-t="Create"><h2><small>3</small>How to create an object</h2>
-<p>A simple way is <b>object literal notation</b>. Write properties inside curly braces <code>{ }</code>, separate them with commas, and place a colon between each key and value.</p>
-<div class="cb" data-out="BMW"><pre>
-let car = {
+  <!-- SLIDE 3: HOW TO CREATE AN OBJECT -->
+  <section class="slide" data-title="3. How to Create an Object">
+    <div class="slide-canvas">
+      <div class="slide-badge"><span class="num-pill">03</span> Creation</div>
+      <h2>How to Create an Object</h2>
+      <p class="lead">The most popular and concise approach in JavaScript is <b>Object Literal Notation</b>.</p>
+      <div class="slide-grid">
+        <div>
+          <p><b>Rules for Object Literal:</b></p>
+          <p>1. Wrap key-value pairs inside curly braces <code>{ }</code>.</p>
+          <p>2. Separate each key and its value with a colon <code>:</code>.</p>
+          <p>3. Separate multiple properties with commas <code>,</code>.</p>
+          <p class="mut">Click "Run" on the code block to inspect the output live!</p>
+        </div>
+        <div>
+          <div class="cb" data-out="BMW">
+            <pre>let car = {
   brand: "BMW",
   color: "Black",
   speed: 200
 };
-console.log(car.brand);</pre></div></section>
 
-<section id="s4" data-t="Access"><h2><small>4</small>Accessing object properties</h2>
-<h3>A. Dot notation</h3>
-<p>Dot notation uses a dot followed by the property name. It is convenient when you know the property name.</p>
-<div class="cb" data-out="Gokul|20"><pre>
-console.log(student.name);
-console.log(student.age);</pre></div>
-<h3>B. Bracket notation</h3>
-<p>Bracket notation puts the property key inside square brackets. A string key is written in quotation marks.</p>
-<div class="cb" data-out="Gokul|20"><pre>
-console.log(student["name"]);
-console.log(student["age"]);</pre></div>
-<h3>C. The key difference: dynamic property access</h3>
-<p>Pick a notation and a property to see what each one returns.</p>
-<div class="lab"><div class="seg" id="nt"><button data-n="dot">Dot</button><button data-n="br">Bracket</button><button data-n="dyn">Dynamic</button></div><div class="tg" id="tg"></div><pre id="exc"></pre><p id="exn" class="mut"></p></div>
-<p><b>Tip:</b> bracket notation also works for property names containing spaces, such as <code>student["first name"]</code>. Dot notation cannot access that property using the same form.</p></section>
+console.log(car.brand);</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section id="s5" data-t="Modify"><h2><small>5</small>Add, update and delete properties</h2>
-<p>Assignment can add or update a property; <code>delete</code> removes a property.</p>
-<div class="cb" data-out='{ age: 21, department: "IT" }'><pre>
-let student = {
-  name: "Gokul",
-  age: 20
-};
+  <!-- SLIDE 4: ACCESSING OBJECT PROPERTIES -->
+  <section class="slide" data-title="4. Accessing Properties">
+    <div class="slide-canvas">
+      <div class="slide-badge"><span class="num-pill">04</span> Access Notation</div>
+      <h2>Accessing Object Properties</h2>
+      <div class="slide-grid">
+        <div>
+          <h3>A. Dot Notation: <code>student.name</code></h3>
+          <p>Fast, readable, and standard when the property name is already known.</p>
+
+          <h3>B. Bracket Notation: <code>student["name"]</code></h3>
+          <p>Required when keys contain spaces or special characters (e.g. <code>student["first name"]</code>).</p>
+
+          <h3>C. Dynamic Property Access</h3>
+          <p>Read a property stored dynamically inside a variable using <code>student[key]</code>.</p>
+        </div>
+        <div>
+          <div class="lab">
+            <div style="font-size: 13px; font-weight: 700; color: var(--mut); margin-bottom: 8px; text-transform: uppercase;">
+              Live Access Explorer:
+            </div>
+            <div class="seg" id="nt">
+              <button data-n="dot">Dot</button>
+              <button data-n="br">Bracket</button>
+              <button data-n="dyn">Dynamic</button>
+            </div>
+            <div class="tg" id="tg"></div>
+            <pre id="exc"></pre>
+            <p id="exn" class="mut" style="font-size: 14px; margin-top: 8px;"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 5: ADD, UPDATE & DELETE PROPERTIES -->
+  <section class="slide" data-title="5. Mutating Properties">
+    <div class="slide-canvas">
+      <div class="slide-badge"><span class="num-pill">05</span> Manipulation</div>
+      <h2>Add, Update and Delete Properties</h2>
+      <div class="slide-grid">
+        <div>
+          <p>JavaScript objects are mutable in memory:</p>
+          <p>• <b>Add:</b> Assign to an unassigned property: <code>student.department = "IT";</code></p>
+          <p>• <b>Update:</b> Re-assign an existing property: <code>student.age = 21;</code></p>
+          <p>• <b>Delete:</b> Remove an existing property using <code>delete student.name;</code></p>
+          <div class="cb" data-out='{ age: 21, department: "IT" }'>
+            <pre>let student = { name: "Gokul", age: 20 };
 student.department = "IT"; // Add
 student.age = 21;          // Update
 delete student.name;       // Delete
-console.log(student);</pre></div>
-<p>Try each step yourself:</p>
-<div class="lab"><div class="seg" id="pb"><button data-a="add">Add department</button><button data-a="upd">Update age</button><button data-a="del">Delete name</button><button data-a="rs">Reset</button></div><pre id="plc"></pre><pre id="plo"></pre></div></section>
+console.log(student);</pre>
+          </div>
+        </div>
+        <div>
+          <div class="lab">
+            <div style="font-size: 13px; font-weight: 700; color: var(--mut); margin-bottom: 8px; text-transform: uppercase;">
+              Interactive Mutation Playground:
+            </div>
+            <div class="seg" id="pb">
+              <button data-a="add">Add department</button>
+              <button data-a="upd">Update age</button>
+              <button data-a="del">Delete name</button>
+              <button data-a="rs">Reset</button>
+            </div>
+            <pre id="plc"></pre>
+            <pre id="plo"></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section id="s6" data-t="Methods"><h2><small>6</small>Methods inside objects</h2>
-<p>A function stored as an object property is called a method. A method lets an object perform an action.</p>
-<div class="cb" data-out="Hello, my name is Gokul"><pre>
-let student = {
+  <!-- SLIDE 6: METHODS INSIDE OBJECTS -->
+  <section class="slide" data-title="6. Object Methods">
+    <div class="slide-canvas">
+      <div class="slide-badge"><span class="num-pill">06</span> Behavior</div>
+      <h2>Methods Inside Objects</h2>
+      <p class="lead">A function stored as a property inside an object is called a <b>method</b>.</p>
+      <div class="slide-grid">
+        <div>
+          <p>Methods enable objects to perform actions and encapsulate behavior alongside data.</p>
+          <p><b>The <code>this</code> keyword:</b></p>
+          <p>Inside an object method, <code>this</code> refers to the owner object that is currently executing the function.</p>
+          <p>Calling <code>student.greet()</code> allows the function to access <code>this.name</code> which evaluates to <code>"Gokul"</code>.</p>
+        </div>
+        <div>
+          <div class="cb" data-out="Hello, my name is Gokul">
+            <pre>let student = {
   name: "Gokul",
   greet: function() {
     console.log("Hello, my name is " + this.name);
   }
 };
-student.greet();</pre></div>
-<p>Here, <code>this.name</code> refers to the object’s name when the method is called as <code>student.greet()</code>.</p></section>
 
-<section id="s7" data-t="Program"><h2><small>7</small>Complete demonstration program</h2>
-<p>This program demonstrates object creation, dot notation, bracket notation, dynamic access, adding and updating properties, calling a method, and deleting a property.</p>
-<div class="cb"><pre>
-let student = {
+student.greet();</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 7: COMPLETE DEMO PROGRAM -->
+  <section class="slide" data-title="7. Live Demo Program">
+    <div class="slide-canvas">
+      <div class="slide-badge"><span class="num-pill">07</span> Execution</div>
+      <h2>Complete Demonstration Program</h2>
+      <div class="slide-grid">
+        <div>
+          <p class="mut">Full script demonstrating creation, dot/bracket access, dynamic lookup, adding, updating, method call, and deleting.</p>
+          <div class="cb">
+            <pre>let student = {
   name: "Gokul",
   age: 20,
   department: "IT",
   greet: function() {
     console.log("Hello, my name is " + this.name);
   }
-};</pre></div>
-<div><button id="rn" class="btn pri">Run program</button> <button id="rz" class="btn">Reset</button></div>
-<ol class="st" id="st"></ol>
-<p id="fn" hidden>The final output is <code>undefined</code> because the <code>department</code> property has been deleted before it is accessed.</p></section>
+};</pre>
+          </div>
+          <div style="margin-top: 14px;">
+            <button id="rn" class="btn pri">▶ Run step-by-step</button>
+            <button id="rz" class="btn">↺ Reset</button>
+          </div>
+          <p id="fn" hidden style="margin-top: 12px; font-size: 14px; color: var(--val);">
+            Note: The final output is <code>undefined</code> because <code>department</code> was deleted before access.
+          </p>
+        </div>
+        <div>
+          <div class="lab" style="margin: 0; max-height: 440px; overflow-y: auto;">
+            <div style="font-size: 13px; font-weight: 700; color: var(--mut); margin-bottom: 8px; text-transform: uppercase;">
+              Execution Timeline:
+            </div>
+            <ol class="st" id="st"></ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section id="s8" data-t="Uses"><h2><small>8</small>Real-world uses of objects</h2>
-<div class="g">
-<div><b>🎓 Student management</b><p>Store a student’s name, register number, marks, and department.</p></div>
-<div><b>🛒 Online shopping</b><p>Store product names, prices, descriptions, and stock details.</p></div>
-<div><b>🚗 Vehicle applications</b><p>Store a vehicle’s brand, model, and speed.</p></div>
-<div><b>🌐 Web applications</b><p>Organize user profiles and settings.</p></div>
-</div></section>
+  <!-- SLIDE 8: REAL-WORLD USES -->
+  <section class="slide" data-title="8. Real-world Uses">
+    <div class="slide-canvas">
+      <div class="slide-badge"><span class="num-pill">08</span> Practical Uses</div>
+      <h2>Real-world Applications of Objects</h2>
+      <p class="lead">In industry software, nearly every entity is modeled using objects:</p>
+      <div class="g">
+        <div>
+          <b>🎓 Student Management</b>
+          <p>Store student name, roll number, department, CGPA, and semester grades.</p>
+        </div>
+        <div>
+          <b>🛒 Online Shopping (E-Commerce)</b>
+          <p>Manage product titles, prices, SKU, ratings, discount rates, and cart inventory.</p>
+        </div>
+        <div>
+          <b>🚗 Vehicle Telematics</b>
+          <p>Represent vehicle brand, model year, fuel efficiency, speed, and GPS position.</p>
+        </div>
+        <div>
+          <b>🌐 Web Applications &amp; Auth</b>
+          <p>Manage user login tokens, user preferences, dark mode settings, and API responses.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section id="s9" data-t="Benefits"><h2><small>9</small>Advantages of objects</h2>
-<ol class="ad"><li>They group related information in one place.</li><li>They make code easier to read and maintain.</li><li>Properties can be added, updated, and deleted.</li><li>Objects can contain methods that perform actions.</li><li>They help represent real-world things in software.</li></ol></section>
+  <!-- SLIDE 9: ADVANTAGES OF OBJECTS -->
+  <section class="slide" data-title="9. Advantages">
+    <div class="slide-canvas">
+      <div class="slide-badge"><span class="num-pill">09</span> Benefits</div>
+      <h2>Advantages of JavaScript Objects</h2>
+      <div class="ad-grid">
+        <div class="ad-card">
+          <div class="ad-num">1</div>
+          <div class="ad-text"><b>Data Cohesion:</b> Groups related data and properties in a single logical place rather than scattered loose variables.</div>
+        </div>
+        <div class="ad-card">
+          <div class="ad-num">2</div>
+          <div class="ad-text"><b>High Readability:</b> Makes large codebases self-documenting and easier for teams to maintain and debug.</div>
+        </div>
+        <div class="ad-card">
+          <div class="ad-num">3</div>
+          <div class="ad-text"><b>Dynamic Flexibility:</b> Properties can be added, updated, or removed on the fly as application state shifts.</div>
+        </div>
+        <div class="ad-card">
+          <div class="ad-num">4</div>
+          <div class="ad-text"><b>Behavior Encapsulation:</b> Bundles methods with their corresponding data using the contextual <code>this</code> keyword.</div>
+        </div>
+        <div class="ad-card">
+          <div class="ad-num">5</div>
+          <div class="ad-text"><b>Real-World Modeling:</b> Directly mirrors physical world concepts (cars, users, accounts) into software architecture.</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section id="s10" data-t="Class"><h2><small>10</small>Object vs. class</h2>
-<div class="g">
-<div><b>Object</b><p>A particular collection of properties and methods.</p></div>
-<div><b>Class</b><p>A template that can be used to create objects.</p></div>
-</div>
-<div class="cb" data-out="Gokul"><pre>
-class Student {
+  <!-- SLIDE 10: OBJECT VS CLASS -->
+  <section class="slide" data-title="10. Object vs Class">
+    <div class="slide-canvas">
+      <div class="slide-badge"><span class="num-pill">10</span> Comparison</div>
+      <h2>Object vs. Class</h2>
+      <div class="slide-grid">
+        <div>
+          <div class="g" style="grid-template-columns: 1fr; margin-bottom: 16px;">
+            <div>
+              <b>Object (Instance)</b>
+              <p>A specific, concrete collection of real property values residing in memory.</p>
+            </div>
+            <div>
+              <b>Class (Blueprint)</b>
+              <p>A reusable template or blueprint introduced in ES6 for instantiating multiple objects.</p>
+            </div>
+          </div>
+          <p class="mut" style="font-size: 14px;">An object literal is quick for standalone data; a class is best when generating dozens of similar objects.</p>
+        </div>
+        <div>
+          <div class="cb" data-out="Gokul">
+            <header><span>ES6 Class Instantiation</span></header>
+            <pre>class Student {
   constructor(name, age) {
     this.name = name;
     this.age = age;
   }
 }
-let student1 = new Student("Gokul", 20);
-console.log(student1.name); // Gokul</pre></div>
-<p>The main demonstration program uses an object literal; it does not declare a class. Here, <code>Student</code> is the class name, and <code>student1</code> refers to an object created from that class. This is an additional concept; a class is not required for the main seminar demonstration.</p></section>
 
-<section id="s11" data-t="Wrap-up"><h2><small>11</small>Conclusion</h2>
-<p>To conclude, objects are an essential part of JavaScript. We can create objects using object literal notation, access their properties using dot or bracket notation, change their data, and call methods to perform actions. Objects help us organize information and build structured, interactive applications.</p>
-<blockquote>“In JavaScript, objects organize data, dot notation keeps access simple, and bracket notation makes it dynamic—together, they help us write clear and flexible code.”</blockquote>
-<p>Thank you all for giving me this opportunity to present my seminar.</p></section>
+let student1 = new Student("Gokul", 20);
+console.log(student1.name); // Gokul</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 11: CONCLUSION & QA -->
+  <section class="slide" data-title="11. Conclusion">
+    <div class="slide-canvas">
+      <div class="slide-badge"><span class="num-pill">11</span> Summary</div>
+      <h2>Conclusion &amp; Wrap-up</h2>
+      <blockquote>
+        “In JavaScript, objects organize data, dot notation keeps access simple, and bracket notation makes it dynamic—together, they help us write clear, flexible, and powerful code.”
+      </blockquote>
+      <div class="slide-grid">
+        <div>
+          <p>• Objects are foundational to modern JavaScript, APIs, and frameworks like React, Node, and Vue.</p>
+          <p>• Object literal notation provides a clean, native way to bundle state and behavior.</p>
+        </div>
+        <div>
+          <div class="thank-you-box">
+            <h3>Thank You!</h3>
+            <p style="margin: 0; color: var(--mut);">Respected staff and my dear friends for your attention.</p>
+            <p style="margin-top: 10px; font-weight: 600; color: var(--key);">Questions &amp; Answers</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
+
+<!-- BOTTOM PRESENTER TOOLBAR -->
+<footer class="deck-bottom">
+  <div class="presenter-info">
+    <div class="presenter-avatar">G</div>
+    <span><b>Gokul</b> • IT Department</span>
+  </div>
+
+  <div class="nav-controls">
+    <button id="btn-prev" class="nav-btn" onclick="deck.goPrev()">
+      <span>◀</span> <span>Prev</span>
+    </button>
+    <div class="slide-counter">
+      <span id="cur-slide">1</span> / <span id="total-slides">12</span>
+    </div>
+    <button id="btn-next" class="nav-btn" onclick="deck.goNext()">
+      <span>Next</span> <span>▶</span>
+    </button>
+  </div>
+
+  <div class="shortcut-hints">
+    <span>Keys:</span>
+    <kbd class="kbd">←</kbd>
+    <kbd class="kbd">→</kbd>
+    <kbd class="kbd">Space</kbd>
+    <kbd class="kbd">F</kbd>
+  </div>
+</footer>
+
+<!-- SLIDE OVERVIEW / SORTER MODAL -->
+<div id="overview-modal">
+  <div class="overview-header">
+    <h2>Presentation Slides (Overview)</h2>
+    <button class="ctrl-btn" onclick="deck.toggleOverview()">✕ Close</button>
+  </div>
+  <div class="overview-grid" id="overview-grid"></div>
+</div>
+
 <script>
-const $=q=>document.querySelector(q),$$=q=>document.querySelectorAll(q),J=JSON.stringify,S={name:"Gokul",age:20,department:"IT"},ks=Object.keys(S);
-const hl=t=>t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/(\/\/.*)|("[^"]*")|\b(let|function|delete|class|constructor|new|this)\b|\b(\d+)\b|\b(\w+)(?=:)/g,(m,c,s,w,n)=>`<i class=${c?"c":s?"s":w?"w":n?"n":"p"}>${m}</i>`);
-// code blocks
-$$('.cb').forEach(b=>{const pre=b.querySelector('pre');pre.innerHTML=hl(pre.textContent.trim());const o=b.dataset.out;if(!o)return;
- const h=document.createElement('header'),out=document.createElement('div');h.innerHTML='<span>JavaScript</span><button class="btn">Run</button>';
- out.className='out';out.hidden=true;out.innerHTML=o.split('|').map(x=>'<div><span class="mut">›</span> '+x+'</div>').join('');
- b.prepend(h);b.append(out);h.lastChild.onclick=e=>{out.hidden=!out.hidden;e.target.textContent=out.hidden?'Run':'Hide output'}});
-// hero card
-$('#hc').innerHTML='<div>let student = {</div>'+ks.map(x=>`<button class="row" data-k="${x}"><span class="k">${x}</span><span class="v">${J(S[x])}</span></button>`).join('')+'<div>};</div><p id="hr">Tap a key to read its value.</p>';
-$('#hc').onclick=e=>{const b=e.target.closest('.row');if(!b)return;$$('.row').forEach(r=>r.classList.toggle('sel',r==b));$('#hr').innerHTML='student.'+b.dataset.k+' → <b>'+S[b.dataset.k]+'</b>'};
-// access explorer
-let n='dot',k='name';
-$('#tg').innerHTML=ks.map(x=>`<button data-k="${x}">${x}</button>`).join('');
-function ex(){const r=S[k],c={dot:`console.log(student.${k}); // ${r}`,br:`console.log(student["${k}"]); // ${r}`,dyn:`let key = "${k}";\nconsole.log(student[key]); // ${r}\nconsole.log(student.key); // undefined`}[n];
- $('#exc').innerHTML=hl(c);
- $('#exn').textContent={dot:'Dot notation uses the property name directly.',br:'Bracket notation puts the key inside square brackets, as a string.',dyn:'student[key] reads the variable key, so it reaches the property whose name it holds. student.key looks for a property literally named “key”, so it is undefined.'}[n];
- $$('#nt button').forEach(b=>b.classList.toggle('on',b.dataset.n==n));$$('#tg button').forEach(b=>b.classList.toggle('on',b.dataset.k==k))}
-$('#nt').onclick=e=>{if(e.target.dataset.n){n=e.target.dataset.n;ex()}};
-$('#tg').onclick=e=>{if(e.target.dataset.k){k=e.target.dataset.k;ex()}};ex();
-// add / update / delete playground
-let st={name:"Gokul",age:20},lc='// choose an action';
-const A={add:['student.department = "IT";',()=>st.department="IT"],upd:['student.age = 21;',()=>st.age=21],del:['delete student.name;',()=>delete st.name]};
-function pl(){$('#plc').innerHTML=hl(lc);const e=Object.entries(st);$('#plo').innerHTML=hl('console.log(student);\n'+(e.length?'{\n'+e.map(([a,b])=>`  ${a}: ${J(b)}`).join(',\n')+'\n}':'{}'))}
-$('#pb').onclick=e=>{const a=e.target.dataset.a;if(!a)return;if(a=='rs'){st={name:"Gokul",age:20};lc='// choose an action'}else{A[a][1]();lc=A[a][0]}pl()};pl();
-// program runner
-const P=[["Dot notation",'console.log(student.name);',"Gokul"],["Bracket notation",'console.log(student["age"]);',"20"],["Dynamic property access",'let key = "department";\nconsole.log(student[key]);',"IT"],["Add a property",'student.college = "MGR University";\nconsole.log(student.college);',"MGR University"],["Update a property",'student.age = 21;\nconsole.log(student.age);',"21"],["Call a method",'student.greet();',"Hello, my name is Gokul"],["Delete a property",'delete student.department;\nconsole.log(student.department);',"undefined"]];
-$('#st').innerHTML=P.map(([t,c,o])=>`<li><b>${t}</b><pre>${hl(c)}</pre><div class="o"><span class="mut">›</span> ${o}</div></li>`).join('');
-let tm=[];const rs=()=>{tm.forEach(clearTimeout);tm=[];$$('#st li').forEach(l=>l.classList.remove('done'));$('#fn').hidden=true};
-$('#rn').onclick=()=>{rs();$$('#st li').forEach((l,i)=>tm.push(setTimeout(()=>{l.classList.add('done');if(i==6)$('#fn').hidden=false},i*500)))};$('#rz').onclick=rs;
-// navigation, progress, theme
-const secs=[...$$('section[data-t]')];
-$('#nav').innerHTML=secs.map(s=>`<button data-i="${s.id}">${s.dataset.t}</button>`).join('');
-$('#nav').onclick=e=>{const i=e.target.dataset.i;i&&document.getElementById(i).scrollIntoView()};
-const act=id=>$$('#nav button').forEach(b=>{const on=b.dataset.i==id,was=b.classList.contains('on');b.classList.toggle('on',on);if(on&&!was)b.scrollIntoView({inline:'center',block:'nearest'})});
-const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&act(e.target.id)),{rootMargin:'-30% 0px -60% 0px'});secs.forEach(s=>io.observe(s));
-addEventListener('scroll',()=>{const h=document.documentElement,m=h.scrollHeight-h.clientHeight;$('#pg').style.width=(m>0?100*h.scrollTop/m:0)+'%';if(m>0&&h.scrollTop>=m-4)act(secs[secs.length-1].id)},{passive:true});
-$('#th').onclick=()=>{const d=document.documentElement,dark=d.dataset.theme?d.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;d.dataset.theme=dark?'light':'dark'};
+// Selector utilities
+const $ = q => document.querySelector(q);
+const $$ = q => document.querySelectorAll(q);
+const J = JSON.stringify;
+
+// Highlight syntax helper
+const hl = t => t
+  .replace(/&/g, "&amp;")
+  .replace(/</g, "&lt;")
+  .replace(/(\/\/.*)|("[^"]*")|\b(let|function|delete|class|constructor|new|this)\b|\b(\d+)\b|\b(\w+)(?=:)/g,
+    (m, c, s, w, n) => `<i class="${c ? 'c' : s ? 's' : w ? 'w' : n ? 'n' : 'p'}">${m}</i>`
+  );
+
+// ================= PRESENTATION DECK CONTROLLER =================
+class PresentationDeck {
+  constructor() {
+    this.slides = Array.from($$('.slide'));
+    this.total = this.slides.length;
+    this.currentIndex = 0;
+    this.progressBar = $('#progress-bar');
+    this.curSlideEl = $('#cur-slide');
+    this.totalSlidesEl = $('#total-slides');
+    this.btnPrev = $('#btn-prev');
+    this.btnNext = $('#btn-next');
+    this.overviewModal = $('#overview-modal');
+    this.overviewGrid = $('#overview-grid');
+
+    this.init();
+  }
+
+  init() {
+    this.totalSlidesEl.textContent = this.total;
+    this.renderOverviewGrid();
+    this.updateSlide(0);
+
+    // Keyboard controls
+    document.addEventListener('keydown', e => {
+      // Don't intercept if user is typing in an input
+      if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
+
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        this.goNext();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp' || (e.key === 'Backspace' && !e.target.isContentEditable)) {
+        e.preventDefault();
+        this.goPrev();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        this.goTo(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        this.goTo(this.total - 1);
+      } else if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        this.toggleFullscreen();
+      } else if (e.key === 'o' || e.key === 'O') {
+        e.preventDefault();
+        this.toggleOverview();
+      } else if (e.key === 'Escape' && this.overviewModal.classList.contains('open')) {
+        this.toggleOverview(false);
+      }
+    });
+
+    // Touch swipe support for presenter remotes & mobile
+    let touchStartX = 0;
+    document.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    document.addEventListener('touchend', e => {
+      const diffX = e.changedTouches[0].screenX - touchStartX;
+      if (Math.abs(diffX) > 50) {
+        if (diffX < 0) this.goNext();
+        else this.goPrev();
+      }
+    }, { passive: true });
+
+    // Buttons
+    $('#btn-fullscreen').onclick = () => this.toggleFullscreen();
+    $('#btn-overview').onclick = () => this.toggleOverview();
+    $('#btn-theme').onclick = () => this.toggleTheme();
+  }
+
+  updateSlide(index) {
+    if (index < 0 || index >= this.total) return;
+    this.currentIndex = index;
+
+    this.slides.forEach((s, i) => {
+      s.classList.toggle('active', i === index);
+    });
+
+    this.curSlideEl.textContent = index + 1;
+    this.btnPrev.disabled = index === 0;
+    this.btnNext.disabled = index === this.total - 1;
+
+    // Progress bar
+    const pct = ((index + 1) / this.total) * 100;
+    this.progressBar.style.width = pct + '%';
+
+    // Update active in overview
+    $$('.overview-card').forEach((c, i) => {
+      c.classList.toggle('active', i === index);
+    });
+  }
+
+  goTo(index) {
+    this.updateSlide(index);
+    this.toggleOverview(false);
+  }
+
+  goNext() {
+    if (this.currentIndex < this.total - 1) {
+      this.updateSlide(this.currentIndex + 1);
+    }
+  }
+
+  goPrev() {
+    if (this.currentIndex > 0) {
+      this.updateSlide(this.currentIndex - 1);
+    }
+  }
+
+  toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(err => {
+        console.warn('Fullscreen request failed', err);
+      });
+      $('#fs-icon').textContent = '✕';
+    } else {
+      if (document.exitFullscreen) document.exitFullscreen();
+      $('#fs-icon').textContent = '⛶';
+    }
+  }
+
+  toggleOverview(forceState) {
+    const isOpen = this.overviewModal.classList.contains('open');
+    const newState = forceState !== undefined ? forceState : !isOpen;
+    this.overviewModal.classList.toggle('open', newState);
+  }
+
+  renderOverviewGrid() {
+    this.overviewGrid.innerHTML = this.slides.map((s, i) => {
+      const title = s.dataset.title || `Slide ${i + 1}`;
+      return `
+        <div class="overview-card ${i === 0 ? 'active' : ''}" onclick="deck.goTo(${i})">
+          <div class="ov-num">Slide ${i + 1}</div>
+          <div class="ov-title">${title}</div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  toggleTheme() {
+    const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+    const newTheme = isDark ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    $('#theme-icon').textContent = newTheme === 'light' ? '☀' : '◐';
+  }
+}
+
+// ================= INTERACTIVE CODE BLOCKS =================
+$$('.cb').forEach(b => {
+  const pre = b.querySelector('pre');
+  pre.innerHTML = hl(pre.textContent.trim());
+  const o = b.dataset.out;
+  if (!o) return;
+
+  const h = document.createElement('header');
+  const out = document.createElement('div');
+  h.innerHTML = '<span>Console Output</span><button class="btn" style="padding: 3px 10px; font-size: 12px;">Run</button>';
+  out.className = 'out';
+  out.hidden = true;
+  out.innerHTML = o.split('|').map(x => `<div><span class="mut">›</span> ${x}</div>`).join('');
+  b.prepend(h);
+  b.append(out);
+
+  h.lastChild.onclick = e => {
+    out.hidden = !out.hidden;
+    e.target.textContent = out.hidden ? 'Run' : 'Hide output';
+  };
+});
+
+// ================= HERO INTERACTIVE CARD =================
+const S = { name: "Gokul", age: 20, department: "IT" };
+const ks = Object.keys(S);
+const hc = $('#hc');
+if (hc) {
+  hc.innerHTML = '<div>let student = {</div>' +
+    ks.map(x => `<button class="row" data-k="${x}"><span class="k">${x}</span><span class="v">${J(S[x])}</span></button>`).join('') +
+    '<div>};</div><p id="hr">Tap any key above to inspect value.</p>';
+
+  hc.onclick = e => {
+    const b = e.target.closest('.row');
+    if (!b) return;
+    $$('.row').forEach(r => r.classList.toggle('sel', r === b));
+    $('#hr').innerHTML = 'student.' + b.dataset.k + ' → <b>' + S[b.dataset.k] + '</b>';
+  };
+}
+
+// ================= SECTION 4: ACCESS EXPLORER =================
+let n = 'dot', k = 'name';
+const tg = $('#tg');
+if (tg) {
+  tg.innerHTML = ks.map(x => `<button data-k="${x}">${x}</button>`).join('');
+
+  function ex() {
+    const r = S[k];
+    const c = {
+      dot: `console.log(student.${k}); // ${r}`,
+      br: `console.log(student["${k}"]); // ${r}`,
+      dyn: `let key = "${k}";\nconsole.log(student[key]); // ${r}\nconsole.log(student.key); // undefined`
+    }[n];
+
+    $('#exc').innerHTML = hl(c);
+    $('#exn').textContent = {
+      dot: 'Dot notation uses the property name directly. Fast and concise.',
+      br: 'Bracket notation puts the key inside square brackets as a string. Handles spaces and special chars.',
+      dyn: 'student[key] evaluates variable key ("' + k + '"). In contrast, student.key looks literally for property "key", returning undefined.'
+    }[n];
+
+    $$('#nt button').forEach(b => b.classList.toggle('on', b.dataset.n === n));
+    $$('#tg button').forEach(b => b.classList.toggle('on', b.dataset.k === k));
+  }
+
+  $('#nt').onclick = e => {
+    if (e.target.dataset.n) {
+      n = e.target.dataset.n;
+      ex();
+    }
+  };
+  tg.onclick = e => {
+    if (e.target.dataset.k) {
+      k = e.target.dataset.k;
+      ex();
+    }
+  };
+  ex();
+}
+
+// ================= SECTION 5: MUTATION PLAYGROUND =================
+let st = { name: "Gokul", age: 20 };
+let lc = '// Choose an action above';
+const A = {
+  add: ['student.department = "IT";', () => st.department = "IT"],
+  upd: ['student.age = 21;', () => st.age = 21],
+  del: ['delete student.name;', () => delete st.name]
+};
+
+function pl() {
+  $('#plc').innerHTML = hl(lc);
+  const e = Object.entries(st);
+  $('#plo').innerHTML = hl('console.log(student);\n' + (e.length ? '{\n' + e.map(([a, b]) => `  ${a}: ${J(b)}`).join(',\n') + '\n}' : '{}'));
+}
+
+const pb = $('#pb');
+if (pb) {
+  pb.onclick = e => {
+    const a = e.target.dataset.a;
+    if (!a) return;
+    if (a === 'rs') {
+      st = { name: "Gokul", age: 20 };
+      lc = '// Choose an action above';
+    } else {
+      A[a][1]();
+      lc = A[a][0];
+    }
+    pl();
+  };
+  pl();
+}
+
+// ================= SECTION 7: PROGRAM RUNNER =================
+const P = [
+  ["1. Dot notation", 'console.log(student.name);', "Gokul"],
+  ["2. Bracket notation", 'console.log(student["age"]);', "20"],
+  ["3. Dynamic property access", 'let key = "department";\nconsole.log(student[key]);', "IT"],
+  ["4. Add a property", 'student.college = "MGR University";\nconsole.log(student.college);', "MGR University"],
+  ["5. Update a property", 'student.age = 21;\nconsole.log(student.age);', "21"],
+  ["6. Call a method", 'student.greet();', "Hello, my name is Gokul"],
+  ["7. Delete a property", 'delete student.department;\nconsole.log(student.department);', "undefined"]
+];
+
+const stList = $('#st');
+if (stList) {
+  stList.innerHTML = P.map(([t, c, o]) => `<li><b>${t}</b><pre>${hl(c)}</pre><div class="o"><span class="mut">›</span> ${o}</div></li>`).join('');
+  let tm = [];
+  const rs = () => {
+    tm.forEach(clearTimeout);
+    tm = [];
+    $$('#st li').forEach(l => l.classList.remove('done'));
+    $('#fn').hidden = true;
+  };
+
+  $('#rn').onclick = () => {
+    rs();
+    $$('#st li').forEach((l, i) => tm.push(setTimeout(() => {
+      l.classList.add('done');
+      l.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if (i === 6) $('#fn').hidden = false;
+    }, i * 600)));
+  };
+  $('#rz').onclick = rs;
+}
+
+// Initialize Presentation Deck
+const deck = new PresentationDeck();
+window.deck = deck;
 </script>
 </body>
 </html>
