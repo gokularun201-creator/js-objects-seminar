@@ -1112,10 +1112,47 @@ student.greet();</pre>
     </div>
   </section>
 
-<!-- SLIDE 11: CONCLUSION & QA -->
-  <section class="slide" data-title="10. Conclusion">
+  <!-- SLIDE 10: OBJECT VS CLASS -->
+  <section class="slide" data-title="10. Object vs Class">
     <div class="slide-canvas">
-      <div class="slide-badge"><span class="num-pill">10</span> Summary</div>
+      <div class="slide-badge"><span class="num-pill">10</span> Comparison</div>
+      <h2>Object vs. Class</h2>
+      <div class="slide-grid">
+        <div>
+          <div class="g" style="grid-template-columns: 1fr; gap: 16px; margin-bottom: 18px;">
+            <div>
+              <b>Object (Instance)</b>
+              <p>A specific, concrete collection of real property values residing in computer memory.</p>
+            </div>
+            <div>
+              <b>Class (Blueprint)</b>
+              <p>A reusable template introduced in ES6 for instantiating multiple objects with identical structure.</p>
+            </div>
+          </div>
+          <p class="mut" style="font-size: 15px;">An object literal is quick for standalone data; a class is best when generating dozens of similar objects.</p>
+        </div>
+        <div>
+          <div class="cb" data-out="Gokul">
+            <header><span>ES6 Class Instantiation</span></header>
+            <pre>class Student {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
+let student1 = new Student("Gokul", 20);
+console.log(student1.name); // Gokul</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 11: CONCLUSION & QA -->
+  <section class="slide" data-title="11. Conclusion">
+    <div class="slide-canvas">
+      <div class="slide-badge"><span class="num-pill">11</span> Summary</div>
       <h2>Conclusion &amp; Wrap-up</h2>
       <blockquote>
         “In JavaScript, objects organize data, dot notation keeps access simple, and bracket notation makes it dynamic—together, they help us write clear, flexible, and powerful code.”
@@ -1150,7 +1187,7 @@ student.greet();</pre>
       <span>◀</span> <span>Prev</span>
     </button>
     <div class="slide-counter">
-      <span id="cur-slide">1</span> / <span id="total-slides">11</span>
+      <span id="cur-slide">1</span> / <span id="total-slides">12</span>
     </div>
     <button id="btn-next" class="nav-btn" onclick="deck.goNext()">
       <span>Next</span> <span>▶</span>
