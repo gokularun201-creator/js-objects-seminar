@@ -63,7 +63,7 @@ html, body {
   background-image: var(--bg-gradient);
   color: var(--ink);
   font-family: var(--font-main);
-  font-size: 19px;
+  font-size: 20px;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -224,7 +224,7 @@ html, body {
 }
 
 .slide-canvas h1 {
-  font-size: clamp(32px, 3.2vw, 44px);
+  font-size: clamp(35px, 3.5vw, 48px);
   font-weight: 750;
   letter-spacing: -0.02em;
   line-height: 1.2;
@@ -233,7 +233,7 @@ html, body {
 }
 
 .slide-canvas h2 {
-  font-size: clamp(27px, 2.7vw, 37px);
+  font-size: clamp(30px, 3vw, 40px);
   font-weight: 750;
   letter-spacing: -0.015em;
   line-height: 1.2;
@@ -242,20 +242,20 @@ html, body {
 }
 
 .slide-canvas h3 {
-  font-size: clamp(20px, 1.7vw, 25px);
+  font-size: clamp(22px, 1.8vw, 27px);
   font-weight: 700;
   margin: 18px 0 8px;
   color: var(--key);
 }
 
 .slide-canvas p {
-  font-size: clamp(21px, 1.75vw, 27px);
+  font-size: clamp(22.5px, 1.9vw, 29px);
   line-height: 1.68;
   margin: 0 0 16px;
   color: var(--ink);
 }
 .slide-canvas p.lead {
-  font-size: clamp(24.5px, 2.1vw, 31px);
+  font-size: clamp(26px, 2.25vw, 33px);
   line-height: 1.5;
   color: var(--mut);
   margin-bottom: 22px;
@@ -320,7 +320,7 @@ i { font-style: normal; }
 .cb pre {
   padding: 22px 26px;
   margin: 0;
-  font-size: clamp(19px, 1.55vw, 23px);
+  font-size: clamp(20.5px, 1.65vw, 24.5px);
   line-height: 1.7;
   overflow-x: auto;
 }
@@ -328,7 +328,7 @@ i { font-style: normal; }
   padding: 16px 22px;
   border-top: 1px dashed var(--ln);
   background: var(--sf);
-  font: clamp(19px, 1.5vw, 23px)/1.6 var(--font-mono);
+  font: clamp(20.5px, 1.6vw, 24.5px)/1.6 var(--font-mono);
   color: var(--key);
 }
 
@@ -338,7 +338,7 @@ i { font-style: normal; }
   border: 1px solid var(--ln);
   border-radius: 16px;
   padding: 26px 30px;
-  font: clamp(19.5px, 1.6vw, 24px)/1.5 var(--font-mono);
+  font: clamp(21px, 1.7vw, 25.5px)/1.5 var(--font-mono);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   width: 100%;
 }
@@ -373,7 +373,7 @@ i { font-style: normal; }
 }
 #hr {
   margin: 18px 0 0;
-  font-size: clamp(19.5px, 1.55vw, 24px);
+  font-size: clamp(21px, 1.65vw, 25.5px);
   min-height: 1.6em;
   color: var(--key);
   font-weight: 600;
@@ -399,7 +399,7 @@ i { font-style: normal; }
   border: 1px solid var(--ln);
   background: var(--cd);
   color: var(--ink);
-  font-size: clamp(16.5px, 1.3vw, 19.5px);
+  font-size: clamp(17.5px, 1.4vw, 20.5px);
   font-weight: 600;
   padding: 10px 22px;
   border-radius: 99px;
@@ -422,7 +422,7 @@ i { font-style: normal; }
   border-radius: 10px;
   padding: 18px 22px;
   margin: 14px 0;
-  font-size: clamp(17.5px, 1.4vw, 21px);
+  font-size: clamp(19px, 1.5vw, 22.5px);
   line-height: 1.6;
 }
 
@@ -439,7 +439,7 @@ ol.st {
   padding: 8px 0 8px 18px;
   margin-bottom: 12px;
   transition: border-color 0.25s, transform 0.25s;
-  font-size: clamp(19px, 1.5vw, 23px);
+  font-size: clamp(20px, 1.6vw, 24.5px);
 }
 .st li.done {
   border-color: var(--success);
@@ -447,11 +447,11 @@ ol.st {
 }
 .st pre {
   margin: 5px 0;
-  font-size: clamp(16.5px, 1.3vw, 19.5px);
+  font-size: clamp(17.5px, 1.4vw, 20.5px);
 }
 .st .o {
   display: none;
-  font: clamp(17px, 1.35vw, 20px) var(--font-mono);
+  font: clamp(18.5px, 1.45vw, 21.5px) var(--font-mono);
   color: var(--val);
 }
 .st .done .o {
@@ -490,12 +490,12 @@ ol.st {
 }
 .g b {
   display: block;
-  font-size: clamp(22px, 1.65vw, 27px);
+  font-size: clamp(23.5px, 1.75vw, 28.5px);
   margin-bottom: 14px;
   color: var(--ink-bright);
 }
 .g p {
-  font-size: clamp(18px, 1.35vw, 21px);
+  font-size: clamp(19px, 1.45vw, 22.5px);
   line-height: 1.6;
   margin: 0;
   color: var(--mut);
@@ -543,7 +543,7 @@ ol.st {
   flex-shrink: 0;
 }
 .ad-text {
-  font-size: clamp(19px, 1.5vw, 23px);
+  font-size: clamp(20px, 1.6vw, 24.5px);
   line-height: 1.6;
   color: var(--ink);
 }
@@ -558,7 +558,7 @@ blockquote {
   border-left: 5px solid var(--key);
   background: var(--accent-light);
   border-radius: 0 16px 16px 0;
-  font-size: clamp(24px, 2.3vw, 34px);
+  font-size: clamp(26px, 2.45vw, 36px);
   line-height: 1.6;
   font-weight: 500;
   color: var(--ink-bright);
@@ -574,7 +574,7 @@ blockquote {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 .thank-you-box h3 {
-  font-size: clamp(35px, 3.4vw, 50px);
+  font-size: clamp(38px, 3.6vw, 54px);
   margin: 0 0 10px;
   color: var(--ink-bright);
 }
